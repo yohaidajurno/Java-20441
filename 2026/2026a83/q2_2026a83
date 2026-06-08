@@ -1,1 +1,27 @@
-public
+public static int myIntSqrt(int n){
+  int x = 0;
+  while((x+1) * (x+1) <=n){
+    x++;
+  }
+  return x;
+}
+public static int findIndex(int []arr){
+  int lastPerfactSquare = -1;
+  boolean firstNoPerfactSquare = false;
+
+  for(int i = 0;i < arr.length;i++){
+    int root = myIntSqrt(arr[i]);
+    boolean perfactSquare = root * root == arr[i];
+
+    if(perfactSquare){
+      if(firstNoPerfactSquare){
+        return -1;
+      }
+      lastPerfactSquare = i;
+    }
+
+    else firstNoPerfactSquare = true;
+
+  }
+   return lastPerfactSquare; 
+}
