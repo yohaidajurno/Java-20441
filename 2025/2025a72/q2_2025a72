@@ -3,7 +3,7 @@ public static int findHowManyDivisors(int [] arr,int num){
     int count = 0;
     int windowSize = 2 * num + 1;
 
-    if(windowSize < arr.length){
+    if(windowSize > arr.length){
         return -1;
     }
 
