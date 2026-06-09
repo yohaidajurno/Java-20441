@@ -6,14 +6,14 @@ public static int findDivisor(int []arr){
   for (int i = 0 ; i < n ;i++){
 
     if(Math.abs(arr[i]) < minValue && Math.abs(arr[i]) != 1){
-      minValue = arr[i];
+      minValue = Math.abs(arr[i]);
     }
 
   }
 
   //return -1 of there is  arr[i] % minValue != 0 
   for(int i = 0 ; i < n ; i++){
-    if(Math.abs(arr[i]) % Math.abs(minValue) != 0){
+    if(Math.abs(arr[i]) % minValue != 0){
       return -1;
     }
   }
