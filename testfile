@@ -1,0 +1,86 @@
+public static int maxFactor (int num){
+  return maxFactor(num,(int)Math.sqrt(num));
+}
+private static int maxFactor(int num,int factor){
+  if (factor < 2){
+    return -1;
+  }
+
+  if(isFactor(num,factor,0,1,"")){
+    return factor;
+  }
+
+    return maxFactor(num,facotr-1)
+}
+private static boolean isFactor(int num,int factor,int pow,int currPow,String s){
+
+
+  //edge case
+  if( num < currPow){
+    return false;
+  }
+
+  if(num == currPow){
+    System.out.println(s+currPow);
+    return true;
+  }
+
+  nextPow = pow+1;
+  nextCurrPow = (int)Math.pow(factor,nextPow);
+  boolean op1 = isFactor(num-currPow,factor,nextPow,nextCurrPow,s+currPow+"\t");
+  boolean op2 = isFactor(num,factor,nextPow,nextCurrPow,s);
+
+  return op1 || op2;
+
+public static int howManyDivisors (int [] arr, int num){
+
+  int windowSize = 2 * num  + 1;
+  int  n = arr.length;
+  int currSum = 0;
+  int count = 0;
+
+  for (int i = 0 ; i < windowSize;i++){
+    currSum += arr[i];
+  }
+
+  if(currSum == num ){
+    count +=1;
+  }
+
+  for(int i = windowSize; i < arr.length;i++){
+    currSum -= arr[i-windowSize];
+    currSum += arr[i];
+
+  if(currSum == num ){
+    count +=1;
+  }
+  }
+  return count
+}
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+
+
+
+
+  return
+
+
+
+
+
+  
+}
