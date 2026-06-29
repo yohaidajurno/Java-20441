@@ -19,8 +19,12 @@
     "color": "orange",
     "badge": "○"
   },
-  "/Users/yohaidejorno/Desktop/Java-20441/2023/2023a 57/q1.java": {
+  "/Users/yohaidejorno/Desktop/Java-20441/2023": {
     "color": "red",
+    "badge": "●"
+  },
+  "/Users/yohaidejorno/Desktop/Java-20441/2023/2023a 57": {
+    "color": "cyan",
     "badge": "●"
   }
 }
