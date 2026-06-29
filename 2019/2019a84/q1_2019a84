@@ -1,0 +1,21 @@
+public static boolean sumPower3(int num){
+
+return sumPower3(num,1,0);
+
+}
+private static boolean sumPower3(int num,int current,int pow){
+  if(current > num){
+    return false;
+  }
+
+  if(num == 0){
+    return true;
+  }
+
+  current = Math.pow(3,pow);
+  boolean op1 = sumPower3(num-current,current,pow+1);
+  boolean op2 = sumPower3(num,current,pow+1);
+
+  return op1 || op2;
+
+}

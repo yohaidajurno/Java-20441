@@ -1,0 +1,15 @@
+public static int get(int []b ,int k){
+
+  if(k < 0 || k > b.length-1){
+    return Integer.MAX_VALUE;
+  }
+  
+
+
+
+
+
+
+
+
+}
