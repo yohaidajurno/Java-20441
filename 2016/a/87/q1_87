@@ -1,16 +1,19 @@
-private static int minPoints(int[][] m, int i, int j,int sum, int minSum) {
+public static int minDiff(int [] arr){
+    //Edge case 
+    if(arr == null || arr.length ==0){
+        return 0;
+    }
 
-    if (i >= m.length || j >= m[0].length)
-        return Integer.MAX_VALUE;
+    return minDiff(arr,0,0,0);
+}
+private static int minDiff(int[]arr,int i,int sumA,int sumB){
+    //Base case: added all numbers now check 
+    if(i == arr.length){
+       return Math.abs(sumA - sumB);
+    }
 
-    sum += m[i][j];
-    minSum = Math.min(minSum, sum);
+    int takeA = minDiff(arr,i+1,sumA + arr[i] ,sumB);
+    int takeB = minDiff(arr,i+1,sumA,sumB + arr[i]);
 
-    if (i == m.length - 1 && j == m[0].length - 1)
-        return Math.max(1, 1 - minSum);
-
-    int down = minPoints(m, i + 1, j, sum, minSum);
-    int right = minPoints(m, i, j + 1, sum, minSum);
-
-    return Math.min(down, right);
+    return Math.min(takeA,takeB);
 }
