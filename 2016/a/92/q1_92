@@ -1,0 +1,33 @@
+public static int minPath(char[][] minChess,int i ,int j){
+    //Edge case
+    if(minChess == null || minChess.length == 0){
+        return -1;
+    }
+
+    //Boundery case
+    if(i<0||j<0||i>=minChess.length||j>=minChess[0].length||minChess[i][j] ==  '-'){
+        return Integer.MAX_VALUE;
+    }
+
+    //Base case 
+    if(minChess[i][j] == 'K'){
+        return 0;
+    }
+
+    char temp = minChess[i][j];
+    minChess[i][j] = '-';
+
+    int op1 = minPath(minChess,i+2,j+1);
+    int op2 = minPath(minChess,i+2,j-1);
+    int op3 = minPath(minChess,i+1,j+2);
+    int op4 = minPath(minChess,i+1,j-2);
+
+    int op5 = minPath(minChess,i-2,j-1);
+    int op6 = minPath(minChess,i-2,j+1);
+    int op7 = minPath(minChess,i-1,j-2);
+    int op8 = minPath(minChess,i-1,j+2);
+    minChess[i][j] = temp;
+
+    int min == Math.min(Math.min(Math.min(Math.min(Math.min(Math.min(Math.min(op1,op2),op3),op4),op5),op6),op7),op8);
+    // +1 count for the last
+    return min == Integer.MAX_VALUE ? Integer.MAX_VALUE : min +1;
