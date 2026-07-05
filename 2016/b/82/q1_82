@@ -1,0 +1,45 @@
+public static int where(int[] vec) {
+    return where(vec, 0);
+}
+
+private static int where(int[] vec, int p) {
+    // Base case: if we checked all positions, no balance point exists
+    if (p >= vec.length)
+        return -1;
+
+    // Check if current position p is a balance point
+    if (sum(vec, 0, p - 1) == sum(vec, p, vec.length - 1))
+        return p;
+
+    // Recursive case: move to next position and continue searching
+    return where(vec, p + 1);
+}
+
+public static boolean isBalanced(int[] vec, int k) {
+    return isBalanced(vec, k, 0, vec.length - 1, 0);
+}
+
+private static boolean isBalanced(int[] vec, int k, int left, int right, int p) {
+    // Base case: if no more balance levels needed, we've succeeded
+    if (k == 0)
+        return true;
+
+    if (p > right)
+        return false;
+
+    // Recursive case: balance left and right sub-segments with k-1 levels
+    if (sum(vec, left, p - 1) == sum(vec, p, right) &&
+        isBalanced(vec, k - 1, left, p - 1, left) &&
+        isBalanced(vec, k - 1, p, right, p))
+        return true;
+
+    // If the next point is a balance point (p+1)
+    return isBalanced(vec, k, left, right, p + 1);
+}
+
+private static int sum(int[] vec, int lo, int hi) {
+    if (hi < lo)
+        return 0;
+
+    return vec[hi] + sum(vec, lo, hi - 1);
+}

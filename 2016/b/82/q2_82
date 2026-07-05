@@ -1,0 +1,23 @@
+public static boolean isSum(Range[] a, int x) {
+    int low = 0, high = a.length - 1;
+
+    while (low < high) {
+        if (a[low].getSmallest() + a[high].getSmallest() <= x &&
+            x <= a[low].getLargest() + a[high].getLargest()) {
+            return true;
+        }
+
+        if (x < a[low].getSmallest() + a[high].getSmallest()) {
+            high--;
+        } else {
+            low++;
+        }
+    }
+
+    if (a[low].getSmallest() == a[low].getLargest()) {
+        return false;
+    }
+
+    return a[low].getSmallest() * 2 + 1 <= x &&
+           x <= a[low].getLargest() * 2 - 1;
+}
