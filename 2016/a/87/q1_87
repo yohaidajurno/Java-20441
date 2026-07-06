@@ -7,7 +7,7 @@ public static int minDiff(int [] arr){
     return minDiff(arr,0,0,0);
 }
 private static int minDiff(int[]arr,int i,int sumA,int sumB){
-    //Base case: added all numbers now check 
+    
     if(i == arr.length){
        return Math.abs(sumA - sumB);
     }
