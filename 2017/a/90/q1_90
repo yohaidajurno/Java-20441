@@ -1,0 +1,18 @@
+public static int knapSack(Item[] items,int w){
+  return knapSack(items,w,0,0,0);
+}
+
+private static int knapSack(Item[] items,int w,int i,int maxW,int maxV){
+  if( maxW > w){
+    return Integer.MIN_VALUE;
+  }
+
+  if(i >=items.length ){
+    return maxV
+  }
+//take and skip recursion
+  int op1 = knapSack(items,w,i+1,maxW + items[i].getWeight(),maxV + items[i].getValue());
+  int op2 = knapSack(items,w,i+1,maxW,maxV); 
+
+  return Math.max(op1,op2);
+}
