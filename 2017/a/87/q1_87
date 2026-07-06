@@ -1,34 +1,36 @@
-public static int edit(String st1, String st2) {
-    return edit(st1, st2, 0);
+public static boolean covers(int[][] mat, int[] arr, int k) {
+    // Start checking from row 0
+    return covers(mat, arr, k, 0);
 }
 
-private static int edit(String st1, String st2, int count) {
+private static boolean covers(int[][] mat, int[] arr, int k, int startRow) {
 
-    // Both empty
-    if (st1.length() == 0 && st2.length() == 0) {
-        return count;
+    // We used more than k rows
+    if (k < 0) {
+        return false;
     }
 
-    // st2 empty -> must delete all remaining chars from st1
-    if (st2.length() == 0) {
-        return count + st1.length();
+    // No more rows left to check
+    if (startRow == mat.length) {
+        // Success only if every element in arr became 0
+        return allZero(arr);
     }
 
-    // st1 empty -> must add all remaining chars from st2
-    if (st1.length() == 0) {
-        return count + st2.length();
-    }
+    // Create a copy of arr because one recursive option
+    // will modify it
+    int[] temp = new int[arr.length];
+    copy(temp, arr);
 
-    // Same first character
-    if (st1.charAt(0) == st2.charAt(0)) {
-        return edit(st1.substring(1), st2.substring(1), count);
-    }
+    // Use the current row to "cover" elements in temp
+    // Matching elements are usually changed to 0
+    xZero(temp, mat[startRow]);
 
-    // Delete one char from st1
-    int take1 = edit(st1.substring(1), st2, count + 1);
-
-    // Delete one char from st2
-    int take2 = edit(st1, st2.substring(1), count + 1);
-
-    return Math.min(take1, take2);
+    // Two choices:
+    // 1. Take the current row:
+    //    use temp, decrease k, move to next row
+    //
+    // 2. Skip the current row:
+    //    keep original arr, keep k unchanged, move to next row
+    return covers(mat, temp, k - 1, startRow + 1)
+            || covers(mat, arr, k, startRow + 1);
 }
