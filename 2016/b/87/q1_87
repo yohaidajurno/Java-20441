@@ -1,0 +1,15 @@
+public static int count(int sum) {
+    return count(sum, 1);
+}
+
+private static int count(int sum, int start) {
+    if (sum == 0) {
+        return 1;
+    }
+
+    if (start > sum) {
+        return 0;
+    }
+
+    return count(sum - start, start + 1) + count(sum, start + 1);
+}
