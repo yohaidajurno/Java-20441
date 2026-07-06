@@ -1,0 +1,32 @@
+private static int minDragons(int [][] maze){
+    return minDragons(maze,0,0,0);
+}
+private static int minDragons(int [][] maze,int i,int j,int countDragons){
+     
+    if( i< 0 || j <0 || i >= maze.length || j >=maze[0].length || maze[i][j] == 0){
+        return Integer.MAX_VALUE;
+    }
+
+    if(maze[i][j] == 3){
+        countDragons ++;
+    }
+
+    if( i == maze.length-1 && j == maze[0].length-1){
+        return countDragons;
+    }
+
+    int temp = maze[i][j];
+    maze[i][j] = 0;
+    int up = minDragons(maze,i-1,j,countDragons);
+    int down = minDragons(maze,i+1,j,countDragons);
+    int left = minDragons(maze,i,j-1,countDragons);
+    int right = minDragons(maze,i,j+1,countDragons);
+    maze[i][j] = temp;
+
+    return Math.min(Math.min(left,right),Math.min(up,down));
+
+
+
+
+
+}
