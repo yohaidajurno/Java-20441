@@ -1,0 +1,34 @@
+public static int edit(String st1, String st2) {
+    return edit(st1, st2, 0);
+}
+
+private static int edit(String st1, String st2, int count) {
+
+    // Both empty
+    if (st1.length() == 0 && st2.length() == 0) {
+        return count;
+    }
+
+    // st2 empty -> must delete all remaining chars from st1
+    if (st2.length() == 0) {
+        return count + st1.length();
+    }
+
+    // st1 empty -> must add all remaining chars from st2
+    if (st1.length() == 0) {
+        return count + st2.length();
+    }
+
+    // Same first character
+    if (st1.charAt(0) == st2.charAt(0)) {
+        return edit(st1.substring(1), st2.substring(1), count);
+    }
+
+    // Delete one char from st1
+    int take1 = edit(st1.substring(1), st2, count + 1);
+
+    // Delete one char from st2
+    int take2 = edit(st1, st2.substring(1), count + 1);
+
+    return Math.min(take1, take2);
+}
