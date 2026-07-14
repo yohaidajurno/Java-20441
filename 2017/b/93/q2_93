@@ -1,0 +1,19 @@
+public static int findNum(Range rangeA[],int num){
+  int low = 0;
+  int high = rangeA.length - 1;
+  while(low <= high){
+    int mid = low + (high - low) / 2;
+    int lowRange = rangeA[mid].getCenter() - rangeA[mid].getRadius();
+    int highRange = rangeA[mid].getCenter() + rangeA[mid].getRadius();
+
+    if(num >= lowRange && num <= highRange){
+      return mid;
+    } else if(num < lowRange){
+      high = mid - 1;
+    } else {
+      low = mid + 1;
+    }
+    
+}
+return -1;
+}

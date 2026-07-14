@@ -1,0 +1,15 @@
+public static int oneFiveSeven(int n) {
+    if (n < 0)
+        return Integer.MAX_VALUE;
+
+    if (n == 0)
+        return 0;
+
+    int best = Math.min(
+        oneFiveSeven(n - 1),
+        Math.min(oneFiveSeven(n - 5), oneFiveSeven(n - 7))
+    );
+
+    
+    return  best == Integer.MAX_VALUE ? Integer.MAX_VALUE : best + 1; 
+}

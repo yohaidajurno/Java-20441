@@ -1,10 +1,23 @@
-#3
+# 3
 1.f count the number of nodes in the graph
-2.6
-3. g return the number of nodes < x in the graph ,in case of empty grpah ->0,in case of equals to the root then will return the number of the nodes of the left side
-#4
-1.complie error B dont use the abstract function in A that uses int not double as an input
-2.valid
-3.valid
-4.not possible to create objects from abstract class
-#5
+
+    2.6
+
+    3. g return the number of nodes < x in the graph,
+    in case of empty grpah->0, in case of equals to the root then will return the number of the nodes of the left side
+
+# 4
+    1.complie error B dont use the abstract function in A that uses int not double as an input
+
+    2.valid
+
+    3.valid
+
+    4.not possible to create objects from abstract class
+
+# 5
+ 3.0
+ 3.0
+ 7.0
+ the methos returns a number that is the middle of the two list combined if its odd and if its  even it create a new one that is the middle of them 
+ in an edge case of 1 number it will return him and in case of null it will return null 

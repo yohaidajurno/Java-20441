@@ -1,0 +1,15 @@
+public static int findLongestSlope(int[] arr) {
+    int maxLength = 0;
+    int currentLength = 1;
+
+    for (int i = 1; i < arr.length; i++) {
+        if (arr[i] > arr[i - 1]) {
+            currentLength++;
+        } else {
+            maxLength = Math.max(maxLength, currentLength);
+            currentLength = 1;
+        }
+    }
+    maxLength = Math.max(maxLength, currentLength);
+    return maxLength;
+}a

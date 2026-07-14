@@ -1,0 +1,29 @@
+
+public static void printClosest(int[] a, int[] b, int x) {
+    int left = 0, right = b.length - 1, diff = Integer.MAX_VALUE;
+    int resultLeft = 0, resultRight = 0;
+
+    // Continue while we haven't exhausted either array
+    while (left < a.length && right >= 0) {
+
+        // Check if current pair is closer to target than previous best
+        if (Math.abs(a[left] + b[right] - x) < diff) {
+
+            // Update best pair and minimum difference
+            resultLeft = a[left];
+            resultRight = b[right];
+            diff = Math.abs(a[left] + b[right] - x);
+        }
+
+        // If sum is too large, decrease it by moving right pointer left
+        if (a[left] + b[right] > x)
+            right--;
+
+        // If sum is too small, increase it by moving left pointer right
+        else
+            left++;
+    }
+
+    // Print the closest pair found
+    System.out.println(resultLeft + " and " + resultRight);
+}
