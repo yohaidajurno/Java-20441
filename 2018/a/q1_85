@@ -1,15 +1,36 @@
-public static int findLongestSlope(int[] arr) {
-    int maxLength = 0;
-    int currentLength = 1;
+public static int longestSlope(int[][] mat, int num) {
+    return longestSlope(mat, num, 0, 0);
+}
 
-    for (int i = 1; i < arr.length; i++) {
-        if (arr[i] > arr[i - 1]) {
-            currentLength++;
-        } else {
-            maxLength = Math.max(maxLength, currentLength);
-            currentLength = 1;
-        }
+//liner recursion 
+private static int longestSlope(int[][] mat, int num, int i, int j) {
+    if (i >= mat.length)
+        return 0;
+
+    if (j >= mat[0].length)
+        return longestSlope(mat, num, i + 1, 0);
+
+    int currentSlope = longestSloper(
+        mat, num, i, j, mat[i][j] + num
+    );
+
+    int remainingCells = longestSlope(mat, num, i, j + 1);
+
+    return Math.max(currentSlope, remainingCells);
+}
+
+// Explores a slope from one starting position
+private static int longestSloper(
+    int[][] mat, int num, int i, int j, int last
+) {
+    if (i < 0 || j < 0 || i >= mat.length || j >= mat[0].length || mat[i][j] != last - num){
+        return 0;
     }
-    maxLength = Math.max(maxLength, currentLength);
-    return maxLength;
-}a
+
+    int down = longestSloper(mat, num, i + 1, j, mat[i][j]);
+    int up = longestSloper(mat, num, i - 1, j, mat[i][j]);
+    int right = longestSloper(mat, num, i, j + 1, mat[i][j]);
+    int left = longestSloper(mat, num, i, j - 1, mat[i][j]);
+
+    return 1 + Math.max(Math.max(up, down),Math.max(left, right));
+}
