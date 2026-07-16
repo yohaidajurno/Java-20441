@@ -1,0 +1,17 @@
+public static int howManySorted(int n,int max){
+
+}
+private static int howManySorted(int n,int max,int current){
+
+if(current >max ){
+  return 0;
+}
+if(n==0 ){
+  return 1;
+}
+
+int take = howManySorted(n-1,max,current);
+int skip = howManySorted (n,max,current+1);
+
+return take +skip;
+}

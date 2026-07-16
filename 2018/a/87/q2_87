@@ -1,0 +1,17 @@
+public static boolean what(int []a ,int num){
+    int i = 0 ,sum = 0 ;
+
+    for(int j = 0 ; j <a.length;j++){
+        sum+=a[j];
+        
+        while(sum > num && i <= j){
+            sum -= a[i];
+            i++;
+        }
+
+        if(sum == num){
+            return true;
+        }
+      }
+        return false;
+    }
