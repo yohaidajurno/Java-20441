@@ -1,46 +1,23 @@
 public static boolean digitsSumArray(int[] arr, int num) {
-    // Begin with the first digit as the current number.
+    // Start with the first digit as the current number.
     return digitsSumArray(arr, num, 1, arr[0], "");
 }
 
-private static boolean digitsSumArray( int[] arr,  int num, int index,int current, String path){
-
-    // Base case: all array digits have been processed.
+private static boolean digitsSumArray(int[] arr, int num, int index, int current, String path) {
+    // Base case: all digits have been processed.
     if (index == arr.length) {
-        // The final current number must equal the remaining target.
+        // Check whether the final number equals the remaining target.
         if (num == current) {
-            // Print the successful partition.
+            // Print the successful division into numbers.
             System.out.println(path + current);
             return true;
         }
 
-        // This partition does not produce the required sum.
         return false;
     }
 
-    /*
-     * Try one of two possibilities:
-     *
-     * 1. Attach arr[index] to the current number.
-     *    For example: current = 12 and arr[index] = 3 produces 123.
-     *
-     * 2. Finish the current number and begin a new number using arr[index].
-     *    The finished number is subtracted from the remaining target.
-     */
-    return digitsSumArray(
-                arr,
-                num,
-                index + 1,
-                current * 10 + arr[index],
-                path
-           )
-           ||
-           digitsSumArray(
-                arr,
-                num - current,
-                index + 1,
-                arr[index],
-                path + current + " "
-           );
+    // Option 1: Attach the next digit to the current number.
+    // Option 2: Finish the current number and start a new one.
+    return digitsSumArray(arr, num, index + 1, current * 10 + arr[index], path)
+            || digitsSumArray(arr, num - current, index + 1, arr[index], path + current + " ");
 }
-
