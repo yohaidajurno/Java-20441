@@ -1,0 +1,36 @@
+public static int meetingPoint(int[] a, int[] b) {
+    // Binary-search boundaries and the earliest matching index found.
+    int low = 0;
+    int mid = 0;
+    int minIndex = -1;
+
+    // Search only within the length of the shorter array.
+    int high = Math.min(a.length - 1, b.length - 1);
+
+    while (low <= high) {
+        // Find the middle index.
+        int mid = (low + high) / 2;
+
+        // The arrays contain the same value at this index.
+        if (a[mid] == b[mid]) {
+            // Save the matching index.
+            minIndex = mid;
+
+            // Continue searching left for an earlier matching index.
+            high = mid - 1;
+        }
+
+        // According to the arrays' ordering, search to the right.
+        else if (a[mid] > b[mid]) {
+            low = mid + 1;
+        }
+
+        // Otherwise, search to the left.
+        else {
+            high = mid - 1;
+        }
+    }
+
+    // Return the earliest matching index, or -1 if none was found.
+    return minIndex;
+}

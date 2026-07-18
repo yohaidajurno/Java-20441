@@ -1,0 +1,23 @@
+public static boolean sumPower3(int num){
+    return sumPower3(num,0);
+
+}
+private static boolean sumPower3(int num,int pow){
+
+if(num == 0){
+    return true;
+}
+
+if(num < Math.pow(3,pow)){
+    return false;
+}
+
+if(current == num){
+    return true;
+}
+
+boolean take = sumPower3(num-(int)Math.pow(3,pow)),pow+1);
+boolean skip = sumPower3(num,pow);
+
+return take || skip;
+}

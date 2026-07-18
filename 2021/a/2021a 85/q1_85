@@ -1,0 +1,16 @@
+public class q1
+{
+    public static int minPrice(int[][] mat)
+    {
+        return minPrice(mat, 0, 1);
+    }
+
+    public static int minPrice(int[][] mat, int i, int j)
+    {
+        if(j == mat[0].length - 1)
+        {
+            return mat[i][j];
+        }
+        return Math.min(minPrice(mat, j, j + 1) + mat[i][j], minPrice(mat, i, j + 1));
+    }
+}

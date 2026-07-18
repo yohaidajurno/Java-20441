@@ -1,0 +1,36 @@
+public static int maximalNegative(Range[] rangeA) {
+
+    int low = 0;
+    int high = rangeA.length - 1;
+
+    // Stores the largest negative value found.
+    int maxNeg = Integer.MIN_VALUE;
+
+    while (low <= high) {
+        // Find the middle range.
+        int mid = (low + high) / 2;
+
+        // The entire range is non-negative, so search to its left.
+        if (rangeA[mid].getSmall() >= 0) {
+            high = mid - 1;
+        }
+
+        // The range contains both negative and non-negative values.
+        // Therefore, no maximal negative value exists between ranges.
+        else if (rangeA[mid].getBig() >= 0) {
+            return -1;
+        }
+
+        // The entire range is negative.
+        else {
+            // Its upper value is the best negative candidate so far.
+            maxNeg = rangeA[mid].getBig();
+
+            // Search farther to the right for a larger negative value.
+            low = mid + 1;
+        }
+    }
+
+    // Return the largest negative value found.
+    return maxNeg;
+}

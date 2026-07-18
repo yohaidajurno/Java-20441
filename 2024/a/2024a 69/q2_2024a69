@@ -1,0 +1,8 @@
+public static void minNumWithSum(int[] arr, int s){
+
+}
+private static void minNumWithSum(int [] arr,int s){
+
+
+  
+}

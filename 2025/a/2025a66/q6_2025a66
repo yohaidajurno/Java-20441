@@ -1,0 +1,78 @@
+A->A
+A->E->A   so E under A (quation then why E calls A its contirdict no)
+A->A
+E->B B under E
+E->E
+E->C C under E
+D->D
+A->D D under A
+B->B
+C->B B under C so update A->E->C->B , A->D
+Object ->Object 
+Obejct ->A A under object so as far as now we have 
+summary
+Obejct->A->E->C->B and  A->D
+
+now driver
+if a1.f() giving error then f is not belong to A
+if d1.f() giving error then f is not belong to D
+if(print(e2.f)) works then f is belong to E
+if(print(e3.f)) works then f is belong to E
+if(print(b1.f)) works then f is belong to B
+
+comiplation error E D -> no inhirate relation at all between E and D
+
+run time error E A ->  ? 
+so now if we create the drawing its looking lie this
+                      Object
+                         |
+                         A
+                        /\
+                       E  D
+                       |
+                       C
+                       |
+                       B
+
+public class A{
+  public A(int num)
+  public A()
+  public A(Obejct o)
+}
+public class B{
+  public B(E other1,A other2)
+  public B()
+  public B(int x,double y,char c,boolean b)
+}
+public class C{
+  public class C()
+}
+public class D{
+  public class D(String s)
+}
+public class E{
+  public class E()
+  public class E(A a)
+}
+
+public class B extends C {
+    public String f() {
+        return "f2";
+    }
+}
+)
+public class E extends A {
+    public String f() {
+        return "f1";
+    }
+}
+ 
+שגיאת קומפילציה.
+
+a4 הוא משתנה מטיפוס A.
+o1 הוא משתנה מטיפוס Object.
+
+הקומפיילר נכשל כי מנסים להכניס טיפוס אב כללי
+לתוך משתנה מטיפוס בן ספציפי, בלי המרה מפורשת.
+
+תקין 

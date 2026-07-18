@@ -1,0 +1,38 @@
+public static int missingValue (int [] arr){
+  int n = arr.length;
+  int low = 0,high = n-1,mid;
+  
+   int diff = (arr[n- 1] - arr[0]) / n;
+
+  while(low<=high){
+    mid = low + (high - low) / 2;
+
+    if(arr[0] +(mid*diff) != arr[mid] ){
+      high = mid -1;
+    }
+    else{
+      low = mid +1; 
+    }
+  }
+  return arr[0] + (low*diff);
+
+}
+public static int missingValue (int [] arr){
+  int n = arr.length;
+  int low = 0,high = n-1,mid;
+  
+   int diff = (arr[n- 1] - arr[0]) / n;
+
+  while(low<=high){
+    mid = low + (high - low) / 2;
+
+    if(arr[0] +(mid*diff) == arr[mid] ){
+      low = mid + 1;
+    }
+    else{
+      high = mid -1; 
+    }
+  }
+  return arr[0] + (low*diff);
+
+}

@@ -1,0 +1,45 @@
+public class q1
+{
+    public static int matInMat (int[][] mat1, int[][] mat2)
+    {
+        return matInMat(mat1, mat2, 0, 0, 0, "");
+    }
+
+    private static int matInMat (int[][] mat1, int[][]mat2, int i, int j, int count, String str)
+    {
+        if(j == mat1[0].length)
+        {
+            i += 1;
+            j = 0;
+        } 
+        if(i == mat1.length)
+        {
+            System.out.println(str);
+            return count;
+        }
+        if(matInMat (mat1, mat2, i, j, 0, 0) == true)
+        {
+            count++;
+            str += i + "\t" + j + "\n";
+        }
+        return matInMat (mat1, mat2, i, j + 1, count, str);
+    }
+
+    private static boolean matInMat (int[][] mat1, int[][] mat2, int i, int j, int m, int n)
+    {
+        if(n == mat2[0].length)
+        {
+            m += 1;
+            n = 0;
+        }
+        if( m == mat2.length)
+        {
+            return true;
+        }
+        if(i + m >= mat1.length || j + n >= mat1[0].length || mat1[i + m][j + n] != mat2[m][n])
+        {
+            return false;
+        }
+        return matInMat (mat1, mat2, i, j, m, n + 1);
+    }
+}

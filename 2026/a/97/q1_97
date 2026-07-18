@@ -1,0 +1,58 @@
+public static double maxPathAve(int[][] mat, int k) {
+    // Use mat[0][0] as a marker for cells that were already visited.
+    // This is safe because all matrix values are distinct.
+
+    // Try starting by moving down.
+    int down = maxPathAve(mat, 1, 0, k - 1);
+
+    // Try starting by moving right.
+    int right = maxPathAve(mat, 0, 1, k - 1);
+
+    // Select the path with the larger sum.
+    int best = Math.max(down, right);
+
+    // Add the starting cell and calculate the path's average.
+    return (mat[0][0] + best) / (double) k;
+}
+
+private static int maxPathAve(int[][] mat, int row, int col, int k) {
+    // Reject positions outside the matrix.
+    // Also reject cells that were already visited.
+    if (row < 0 || row >= mat.length ||
+        col < 0 || col >= mat[0].length ||
+        mat[row][col] == mat[0][0]) {
+        return Integer.MIN_VALUE;
+    }
+
+    // Base case: only one cell remains in the path.
+    if (k == 1) {
+        return mat[row][col];
+    }
+
+    // Save the current value before marking the cell as visited.
+    int value = mat[row][col];
+    mat[row][col] = mat[0][0];
+
+    // Recursively try all four possible directions.
+    int down = maxPathAve(mat, row + 1, col, k - 1);
+    int up = maxPathAve(mat, row - 1, col, k - 1);
+    int right = maxPathAve(mat, row, col + 1, k - 1);
+    int left = maxPathAve(mat, row, col - 1, k - 1);
+
+    // Backtrack by restoring the cell's original value.
+    mat[row][col] = value;
+
+    // Find the direction that produces the largest path sum.
+    int max = Math.max(
+        Math.max(down, up),
+        Math.max(right, left)
+    );
+
+    // No valid path of the required length was found.
+    if (max == Integer.MIN_VALUE) {
+        return Integer.MIN_VALUE;
+    }
+
+    // Add the current cell to the best continuation.
+    return value + max;
+}

@@ -1,0 +1,14 @@
+    public static int count(int sum){
+        return count(sum, 1);
+    }
+    public static int count(int sum, int next){
+
+        if (sum == 0){
+            return 1;
+        }
+        if (sum < next){
+            return 0;
+        }
+
+        return count(sum - next, next + 1) + count(sum , next + 1);
+    }

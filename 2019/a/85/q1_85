@@ -1,0 +1,30 @@
+public static int longestPalindrome(int[] arr) {
+
+  if(arr == null || arr.length == 0){
+    return 0;
+  }
+    return longestPalindrome(arr, 0, arr.length - 1);
+}
+
+private static int longestPalindrome(int[] arr, int start, int end) {
+  
+    if (start > end) return 0;
+
+    if (start == end) return 1;
+
+    if (isPalindrome(arr, start, end)) {
+        return end - start + 1;
+    }
+    int Start = longestPalindrome(arr, start + 1, end);
+    int End = longestPalindrome(arr, start, end - 1);
+
+    return Math.max(Start, End);
+}
+
+private static boolean isPalindrome(int[] arr, int start, int end) {
+    if (start >= end) return true;
+
+    if (arr[start] != arr[end]) return false;
+
+    return isPalindrome(arr, start + 1, end - 1);
+}

@@ -1,0 +1,32 @@
+public static int findHowManyDivisors(int [] arr,int num){
+    int currentSum = 0;
+    int count = 0;
+    int windowSize = 2 * num + 1;
+
+    if(windowSize > arr.length){
+        return -1;
+    }
+
+    for(int i = 0 ; i < windowSize;i++){
+        currentSum += arr[i];
+    }
+
+    if(cuurentSum % arr[num] == 0){
+        count += 1;
+    }
+
+    for (int i = windowSize ; i < arr.length :i++){
+
+        currentSum -= arr[i-windowSize];
+
+        currentSum += arr[i];
+
+        if(cuurentSum % arr[num] == 0){
+             count += 1;
+        }
+    }
+    return count;
+
+
+    
+}

@@ -1,0 +1,12 @@
+public static int strictlyIncreasing(int[]a){
+    int sum = 0,count = 1;
+    for(int i = 0;i<a.length-1;i++){
+        if(a[i+1]>a[i]){
+            sum += count++
+        }else{
+            count =1;
+        }
+        
+    }
+    return sum;
+}

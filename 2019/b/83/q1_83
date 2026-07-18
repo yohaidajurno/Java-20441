@@ -1,0 +1,21 @@
+public static int longestPath(int [][] mat,int x,int y){
+return longestPath(mat,0,0,x,y);
+}
+private static int longestPath(int [][]mat,int i,int j,int x,int y){
+
+    if(i < 0 || j < 0 || i >=mat.length || j>=mat[0].length || mat[i][j] == 0){
+        return Integer.MIN_VALUE;
+    }
+
+    if(i == x && j == y){
+        return 1;
+    }
+
+    mat[i][j] = 0;
+    int up = longestPath(mat,i-1,j,x,y);
+    int down = longestPath(mat,i+1,j,x,y);
+    int left = longestPath(mat,i,j-1,x,y);
+    int right = longestPath(mat,i,j+1,x,y);
+    mat[i][j] = 1;
+    return 1 + Math.max(Math.max(left,right),Math.max(up,down));
+}
