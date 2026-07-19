@@ -1,0 +1,56 @@
+public static int getMedian(int[] a, int[] b) {
+    // Both sorted arrays have the same length
+    int len = a.length;
+
+    // Binary-search boundaries for the partition in array a
+    int low = 0;
+    int high = len;
+
+    while (low <= high) {
+        // Partition position in array a
+        int i = (low + high) / 2;
+
+        // Complementary partition position in array b
+        int j = len - i;
+
+        // Largest value on the left side of array a
+        int aLeft = (i == 0)
+            ? Integer.MIN_VALUE
+            : a[i - 1];
+
+        // Largest value on the left side of array b
+        int bLeft = (j == 0)
+            ? Integer.MIN_VALUE
+            : b[j - 1];
+
+        // Smallest value on the right side of array a
+        int aRight = (i == len)
+            ? Integer.MAX_VALUE
+            : a[i];
+
+        // Smallest value on the right side of array b
+        int bRight = (j == len)
+            ? Integer.MAX_VALUE
+            : b[j];
+
+        // A correct partition was found:
+        // every value on the left is no greater than every value on the right
+        if (aLeft <= bRight && bLeft <= aRight) {
+            // Since the combined number of elements is even,
+            // the median is the average of the two middle values
+            return (
+                Math.max(aLeft, bLeft)
+                + Math.min(aRight, bRight)
+            ) / 2;
+        } else if (aLeft > bRight) {
+            // The partition in array a is too far to the right
+            high = i - 1;
+        } else {
+            // The partition in array a is too far to the left
+            low = i + 1;
+        }
+    }
+
+    // Reached only when the input does not satisfy the assumptions
+    return Integer.MAX_VALUE;
+}

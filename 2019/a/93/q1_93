@@ -1,9 +1,7 @@
 public static int count(String str, String pattern) {
     return count(str, pattern, 0, 0);
 }
-
-private static int count(String str, String pattern,
-                         int strIndex, int patternIndex) {
+private static int count(String str, String pattern,  int strIndex, int patternIndex) {
     // Base case: if we finished the pattern
     if (patternIndex == pattern.length())
         return 1;

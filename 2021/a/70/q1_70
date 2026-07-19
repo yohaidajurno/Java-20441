@@ -1,0 +1,22 @@
+public static int findMaxPrice(int[] prices, int n) {
+    // Start checking piece sizes from index 1
+    return findMaxPrice(prices, n, 1);
+}
+
+private static int findMaxPrice(int[] prices, int n, int i) {
+    // Invalid case: no more piece sizes or the total length was exceeded
+    if (i >= prices.length || n < 0)
+        return Integer.MIN_VALUE;
+
+    // The entire length was used successfully
+    if (n == 0)
+        return 0;
+
+    // Choose the better option:
+    // 1. Use another piece of size i
+    // 2. Skip size i and move to the next size
+    return Math.max(
+                    findMaxPrice(prices, n - i, i) + prices[i],
+                    findMaxPrice(prices, n, i + 1)
+    );
+}
