@@ -45,6 +45,29 @@ def shingles(text: str, n: int = 5) -> set[tuple[str, ...]]:
     return {tuple(toks[i : i + n]) for i in range(max(0, len(toks) - n + 1))}
 
 
+JAVA_KEYWORDS = {
+    "abstract", "assert", "boolean", "break", "byte", "case", "catch", "char", "class",
+    "const", "continue", "default", "do", "double", "else", "enum", "extends", "false",
+    "final", "finally", "float", "for", "goto", "if", "implements", "import", "instanceof",
+    "int", "interface", "long", "native", "new", "null", "package", "private", "protected",
+    "public", "return", "short", "static", "strictfp", "super", "switch", "synchronized", "this",
+    "throw", "throws", "transient", "true", "try", "void", "volatile", "while",
+    "Math", "Integer", "String", "System", "length", "abs", "max", "min", "pow", "println", "print",
+}
+
+
+def structural_shingles(text: str, n: int = 9) -> set[tuple[str, ...]]:
+    out = []
+    for token in tokens(text):
+        if re.fullmatch(r"\d+", token):
+            out.append("NUM")
+        elif re.fullmatch(r"[A-Za-z_$][A-Za-z0-9_$]*", token) and token not in JAVA_KEYWORDS:
+            out.append("ID")
+        else:
+            out.append(token)
+    return {tuple(out[i : i + n]) for i in range(max(0, len(out) - n + 1))}
+
+
 rows = list(candidates())
 method_groups: dict[str, list[Path]] = defaultdict(list)
 for path, text in rows:
@@ -72,4 +95,19 @@ for (p1, _), (p2, _) in itertools.combinations(rows, 2):
     if score >= 0.20 or containment >= 0.45:
         similar.append((score, containment, p1, p2))
 for score, containment, p1, p2 in sorted(similar, reverse=True):
+    print(f"jaccard={score:.3f} containment={containment:.3f} :: {p1} <> {p2}")
+
+print("\n=== HIGH STRUCTURAL SIMILARITY (IDENTIFIERS NORMALIZED) ===")
+ssh = {p: structural_shingles(t) for p, t in rows}
+structural = []
+for (p1, _), (p2, _) in itertools.combinations(rows, 2):
+    y1, y2 = str(p1).split("/")[0], str(p2).split("/")[0]
+    if y1 == y2 or not ssh[p1] or not ssh[p2]:
+        continue
+    inter = len(ssh[p1] & ssh[p2])
+    score = inter / len(ssh[p1] | ssh[p2])
+    containment = inter / min(len(ssh[p1]), len(ssh[p2]))
+    if score >= 0.26 or containment >= 0.55:
+        structural.append((score, containment, p1, p2))
+for score, containment, p1, p2 in sorted(structural, reverse=True):
     print(f"jaccard={score:.3f} containment={containment:.3f} :: {p1} <> {p2}")

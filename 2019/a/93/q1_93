@@ -1,0 +1,25 @@
+public static int count(String str, String pattern) {
+    return count(str, pattern, 0, 0);
+}
+
+private static int count(String str, String pattern,
+                         int strIndex, int patternIndex) {
+    // Base case: if we finished the pattern
+    if (patternIndex == pattern.length())
+        return 1;
+
+    // Base case: if we finished the string but not the pattern
+    if (strIndex == str.length())
+        return 0;
+
+    int res = 0;
+
+    // If the current character matches the current pattern character
+    if (str.charAt(strIndex) == pattern.charAt(patternIndex)) {
+        // Count possibilities where we use this character
+        res = count(str, pattern, strIndex + 1, patternIndex + 1);
+    }
+
+    // Count possibilities where we skip the current string character
+    return res + count(str, pattern, strIndex + 1, patternIndex);
+}
