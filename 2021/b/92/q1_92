@@ -1,25 +1,29 @@
-public class q1 {
-    public static int printExpr(int[]arr,int num)
-    {
-        return printExpr(arr,num,0,0," ");
+public static int printExpr(int[] arr, int num) {
+    // Start from the first element with an empty expression
+    return printExpr(arr, num, 0, "");
+}
+
+private static int printExpr(int[] arr, int num, int i, String s) {
+    // All array elements have been processed
+    if (i == arr.length) {
+        // Print and count the expression if it reaches the target
+        if (num == 0) {
+            System.out.println(s);
+            return 1;
+        }
+
+        return 0;
     }
 
-    private static int printExpr(int [] arr, int num, int i, int sum, String str)
-    {
-        if(i == arr.length)
-        {
-            if(sum == num)
-            {
-                System.out.println(str);
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-        return printExpr(arr, num,i + 1,sum + arr[i], str + "+" + arr[i]) +
-                printExpr(arr, num,i + 1,sum - arr[i], str + "-" + arr[i])+
-                printExpr(arr, num,i + 1, sum, str);
-    }
+    // Add the current element
+    int plus = printExpr(arr, num - arr[i], i + 1, s + "+" + arr[i]);
+
+    // Subtract the current element
+    int minus = printExpr(arr, num + arr[i], i + 1, s + "-" + arr[i]);
+
+    // Skip the current element
+    int nothing = printExpr(arr, num, i + 1, s);
+
+    // Return the number of valid expressions
+    return plus + minus + nothing;
 }
